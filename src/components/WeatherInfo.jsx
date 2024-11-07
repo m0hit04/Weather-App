@@ -4,47 +4,52 @@ import { CurrentWeatherData } from "./CurrentWeatherData";
 
 export const WeatherInfo = () => {
 
-    const [cityName, setCityName] = useState("New Delhi");
-    const [sunset ,setSunset] = useState("");
-    const [sunrise ,setSunrise] = useState("");
-    const [temp, setTemp] = useState("");
-    const [minTemp, setMinTemp] = useState("")
-    const [maxTemp, setMaxTemp] = useState("")
-    const [feelsLike, setFeelsLike] = useState("")
-    const [date, setDate] = useState("")
-    const [description, setDescription] = useState("")
-    const [windSpeed, setWindSpeed] = useState("")
-    const [humidity, setHumidity] = useState("")
-    const [pressure, setPressure] = useState("")
-    const [weatherIcon, setWeatherIcon] = useState("");
+    const [weatherData, setWeatherData] = useState({
+        cityName: "New Delhi",
+        sunset: "",
+        sunrise: "",
+        temp: "",
+        minTemp: "",
+        maxTemp: "",
+        feelsLike: "",
+        date: "",
+        description: "",
+        windSpeed: "",
+        humidity: "",
+        pressure: "",
+        weatherIcon: ""
+    });
 
 
     useEffect(() => {
         const apiKey = import.meta.env.VITE_API_KEY;
         const apiUrl = import.meta.env.VITE_API_URL;
-        axios.get(`${apiUrl}?q=${cityName}&appid=${apiKey}&units=metric`)
+        axios.get(`${apiUrl}?q=${weatherData.cityName}&appid=${apiKey}&units=metric`)
             .then((res) => {
                 const obj = res.data;
-                setTemp(obj.main.temp);
-                setFeelsLike(obj.main.feels_like);
-                setMinTemp(obj.main.temp_min);
-                setMaxTemp(obj.main.temp_max);
-                setPressure(obj.main.pressure)
-                setHumidity(obj.main.humidity)
-                setSunrise(obj.sys.sunrise)
-                setSunset(obj.sys.sunset)
-                setWindSpeed(obj.wind.speed)
-                setDescription(obj.weather[0].description)
-                setWeatherIcon(obj.weather[0].icon);
-                setDate(obj.dt);
+                setWeatherData({
+                    cityName: obj.name,
+                    temp: obj.main.temp,
+                    feelsLike: obj.main.feels_like,
+                    minTemp: obj.main.temp_min,
+                    maxTemp: obj.main.temp_max,
+                    pressure: obj.main.pressure,
+                    humidity: obj.main.humidity,
+                    sunrise: obj.sys.sunrise,
+                    sunset: obj.sys.sunset,
+                    windSpeed: obj.wind.speed,
+                    description: obj.weather[0].description,
+                    weatherIcon: obj.weather[0].icon,
+                    date: obj.dt
+                })
             }).catch((err) => {
                 console.log(`Error fetching data from the API: ${err}`);
             })
-    }, [cityName])
+    }, [weatherData.cityName])
 
     return (
-        (weatherIcon && <div>
-            <CurrentWeatherData weatherIcon={weatherIcon} sunrise={sunrise} sunset={sunset} dateInUnix={date} temp={temp} windSpeed={windSpeed} humidity={humidity} pressure={pressure} feelsLike={feelsLike} description={description} minTemp={minTemp} maxTemp={maxTemp} />
+        (weatherData.weatherIcon && <div>
+            <CurrentWeatherData data={weatherData} />
         </div>)
     )
 }
