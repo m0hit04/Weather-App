@@ -40,7 +40,7 @@ export const useFetchWeather = () => {
               console.log(`Error fetching data from the API: ${err}`);
           })
           console.log("useEffect",   weatherData);
-  }, [weatherData.cityName])
+  }, [weatherData])
 
   return weatherData;
 }
