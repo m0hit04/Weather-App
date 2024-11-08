@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const fetchWeatherData = async (cityName: string) => {
+export const fetchWeatherData = async (cityName) => {
     const apiKey = import.meta.env.VITE_API_KEY;
     const apiUrl = import.meta.env.VITE_API_URL;
     
