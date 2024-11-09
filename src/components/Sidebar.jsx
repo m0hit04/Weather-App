@@ -47,9 +47,13 @@ export const Sidebar = () => {
                     className="w-full flex items-center justify-between px-4 py-2 hover:bg-gray-700 rounded"
                 >
                     <span>Dark Theme</span>
-                    <div className={`w-12 h-6 flex items-center bg-gray-600 rounded-full p-1 ${isDarkTheme ? 'bg-white' : 'bg-black'}`}>
+                    <div className={`w-12 h-6 rounded-full p-1 transition-colors duration-300 ${
+                        isDarkTheme ? 'bg-blue-600' : 'bg-gray-400'
+                    }`}>
                         <div 
-                            className={`w-4 h-4 rounded-full shadow-md transform duration-300 ease-in-out ${isDarkTheme ? 'translate-x-6 bg-black' : 'bg-white'}`}
+                            className={`w-4 h-4 rounded-full bg-white transform transition-transform duration-300 ${
+                                isDarkTheme ? 'translate-x-6' : 'translate-x-0'
+                            }`}
                         ></div>
                     </div>
                 </button>
