@@ -6,7 +6,7 @@ export const WeatherInfo = () => {
 
     return (
         (weatherData.weatherIcon && <div>
-            <CurrentWeatherData data={weatherData} />
+            <CurrentWeatherData />
         </div>)
     )
 }

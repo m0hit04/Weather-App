@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-
+import { useState, useEffect } from "react";
 function extractTime(unixTimeStamp) {
     const milliseconds = unixTimeStamp * 1000;
     const dateObj = new Date(milliseconds);
@@ -23,13 +23,19 @@ function getDayOfWeek(index) {
   }
 
 export const CurrentWeatherData = () => {
-    const data = useSelector((state) => state.weather);
+
+    const weatherData = useSelector((state) => state.weather);
     const iconUrl = import.meta.env.VITE_WEATHER_ICON_URL;
-    const weatherIconUrl = `${iconUrl}${data.weatherIcon}@2x.png`;
-    const [sunriseHour, sunriseMinute] = extractTime(data.sunrise);
-    const [sunsetHour, sunsetMinute] = extractTime(data.sunset);
-    const [day, date, month] = extractDate(data.date);
-    const [timeInHour, timeInMinutes] = extractTime(data.date);
+    const [weatherIconUrl, setWeatherIconUrl] = useState(`${iconUrl}${weatherData.weatherIcon}@2x.png`);
+
+    useEffect(() => {
+        setWeatherIconUrl(`${iconUrl}${weatherData.weatherIcon}@2x.png`);
+    }, [weatherData.cityName]);
+
+    const [sunriseHour, sunriseMinute] = extractTime(weatherData.sunrise);
+    const [sunsetHour, sunsetMinute] = extractTime(weatherData.sunset);
+    const [day, date, month] = extractDate(weatherData.date);
+    const [timeInHour, timeInMinutes] = extractTime(weatherData.date);
 
     return (
         <div className="flex justify-between">
@@ -40,17 +46,17 @@ export const CurrentWeatherData = () => {
             </div>
             <div>
                 <p>{getDayOfWeek(day)} {date} {month} {timeInHour}:{timeInMinutes}</p>
-                <p>{data.temp}</p>
-                <p>Feels like {data.feelsLike}°C</p>
-                <p>{data.description}</p>
+                <p>{weatherData.temp}</p>
+                <p>Feels like {weatherData.feelsLike}°C</p>
+                <p>{weatherData.description}</p>
             </div>
             <div>
                 <p>More Details</p>
-                <p>Min Temp: {data.minTemp} </p>
-                <p>Max Temp: {data.maxTemp} </p>
-                <p>Wind Speed: {data.windSpeed}</p>
-                <p>Air humidity: {data.humidity} </p>
-                <p>Pressure: {data.pressure} </p>
+                <p>Min Temp: {weatherData.minTemp} </p>
+                <p>Max Temp: {weatherData.maxTemp} </p>
+                <p>Wind Speed: {weatherData.windSpeed}</p>
+                <p>Air humidity: {weatherData.humidity} </p>
+                <p>Pressure: {weatherData.pressure} </p>
             </div>
         </div>
     )
