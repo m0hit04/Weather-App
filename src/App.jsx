@@ -4,6 +4,7 @@ import { store } from './store/store';
 
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
+import Profile from "./pages/Profile";
 
 const router = createBrowserRouter([
   {
@@ -15,12 +16,8 @@ const router = createBrowserRouter([
     element: <Dashboard />
   },
   {
-    path: "/settings",
-    element: <p>settings</p>
-  },
-  {
     path: "/profile",
-    element: <p>profile</p>
+    element: <Profile />
   },
   {
     path: "*",

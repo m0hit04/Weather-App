@@ -24,22 +24,19 @@ export const Sidebar = () => {
             <ul className="space-y-4">
                 <li>
                     <Link to="/dashboard" className="flex items-center px-4 py-2 hover:bg-gray-700">
-                        {/* <span className={`${isCollapsed ? 'hidden' : 'inline'}`}>Dashboard</span> */}
                         <span className="">Dashboard</span>
                     </Link>
                 </li>
                 <li>
-                    <Link to="/settings" className="flex items-center px-4 py-2 hover:bg-gray-700">
-                        {/* <span className={`${isCollapsed ? 'hidden' : 'inline'}`}>Settings</span> */}
-                        <span className="">Settings</span>
-                    </Link>
-                </li>
-                <li>
                     <Link to="/profile" className="flex items-center px-4 py-2 hover:bg-gray-700">
-                        {/* <span className={`${isCollapsed ? 'hidden' : 'inline'}`}>Profile</span> */}
                         <span className="">Profile</span>
                     </Link>
                 </li>
+                {/* <li>
+                    <Link to="/settings" className="flex items-center px-4 py-2 hover:bg-gray-700">
+                        <span className="">Settings</span>
+                    </Link>
+                </li> */}
             </ul>
             <div className="mt-auto p-4">
                 <button 
