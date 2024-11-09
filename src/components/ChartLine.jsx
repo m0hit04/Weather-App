@@ -1,15 +1,20 @@
 import { useRef, useEffect } from 'react';
 import ApexCharts from 'apexcharts';
+import { useSelector } from 'react-redux';
+import { useFetchTemperature } from '../hooks/useFetchTemperature';
 
 export const ChartLine = () => {
+  useFetchTemperature()
   const chartref = useRef(null);
-
+  const temperatureData = useSelector((state) => state.temperature);
+  const xAxisCategories = temperatureData.map((item) => item.time);
+  const yAxisData = temperatureData.map((item) => item.temp);
   useEffect(() => {
 
     const options = {
       series: [{
         name: 'Temp',
-        data: [30,40,45,50,49,60,70]
+        data: yAxisData
       }],
       chart: {
         type: 'line',
@@ -22,7 +27,7 @@ export const ChartLine = () => {
         align: 'center'
       },
       xaxis: {
-        categories: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+        categories: xAxisCategories
       }
     }
 
@@ -32,11 +37,11 @@ export const ChartLine = () => {
     return () => {
       chart.destroy();
     }
-  }, [])
+  }, [temperatureData])
 
   return (
-    <div className="w-4/12">
+    (<div className="w-4/12">
       <div ref={chartref} />
-    </div>
+    </div>)
   )
-} 
+}
