@@ -1,34 +1,41 @@
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useEffect } from 'react';
 import ApexCharts from 'apexcharts';
 
 export const ChartLine = () => {
   const chartref = useRef(null);
 
   useEffect(() => {
-    if (!chartref.current) {
-      return undefined;
-    }
 
     const options = {
-      chart: {
-        type: 'line'
-      },
       series: [{
-        name: 'sales',
-        data: [30,40,45,50,49,60,70,91,125]
+        name: 'Temp',
+        data: [30,40,45,50,49,60,70]
       }],
+      chart: {
+        type: 'line',
+        zoom: {
+          enabled: false
+        }
+      },
+      title: {
+        text: 'Temperature',
+        align: 'center'
+      },
       xaxis: {
-        categories: [1991,1992,1993,1994,1995,1996,1997,1998,1999]
+        categories: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
       }
     }
 
     const chart = new ApexCharts(chartref.current, options)
-
     chart.render();
-  }, [chartref.current])
+
+    return () => {
+      chart.destroy();
+    }
+  }, [])
 
   return (
-    <div className="chart-container">
+    <div className="w-4/12">
       <div ref={chartref} />
     </div>
   )

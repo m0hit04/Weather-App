@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useSelector } from "react-redux";
 
 function extractTime(unixTimeStamp) {
     const milliseconds = unixTimeStamp * 1000;
@@ -23,7 +22,8 @@ function getDayOfWeek(index) {
     return daysOfWeek[index % 7] || "Invalid index";
   }
 
-export const CurrentWeatherData = ({ data }) => {
+export const CurrentWeatherData = () => {
+    const data = useSelector((state) => state.weather);
     const iconUrl = import.meta.env.VITE_WEATHER_ICON_URL;
     const weatherIconUrl = `${iconUrl}${data.weatherIcon}@2x.png`;
     const [sunriseHour, sunriseMinute] = extractTime(data.sunrise);

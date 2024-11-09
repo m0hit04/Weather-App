@@ -1,20 +1,23 @@
-// Sidebar.js
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { toggleSidebar } from '../store/reducers/sidebarSlice';
 import { toggleTheme } from '../store/reducers/globalSlice';
 
 export const Sidebar = () => {
     const navigate = useNavigate();
-    const [isCollapsed, setIsCollapsed] = useState(false);
-    const isDarkTheme = useSelector(state => state.global.isDarkTheme);
     const dispatch = useDispatch();
+    const { isCollapsed, width } = useSelector(state => state.sidebar);
+    const isDarkTheme = useSelector(state => state.global.isDarkTheme);
 
     return (
-        <div className={`bg-gray-800 text-white h-screen ${isCollapsed ? 'w-36' : 'w-56'} transition-width duration-300 flex flex-col`}>
+        <div className={`fixed bg-gray-800 text-white h-screen ${width} transition-width duration-300 flex flex-col z-10`}>
             <div className="flex justify-between p-4">
-                <button onClick={() => navigate("/")} className="text-xl font-mono font-medium" >Breeze</button>
-                <button onClick={() => setIsCollapsed(!isCollapsed)} className="text-white">
+                <button onClick={() => navigate("/")} className="text-xl font-mono font-medium">Breeze</button>
+                <button 
+                    onClick={() => dispatch(toggleSidebar())} 
+                    className="text-white"
+                >
                     {isCollapsed ? '→' : '←'}
                 </button>
             </div>

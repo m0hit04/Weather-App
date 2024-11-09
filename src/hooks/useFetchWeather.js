@@ -1,27 +1,16 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchWeatherData } from "../api/apis";
+import { setWeatherData } from "../store/reducers/weatherSlice";
 
 export const useFetchWeather = () => {
-  const [weatherData, setWeatherData] = useState({
-      cityName: "New Delhi",
-      sunset: "",
-      sunrise: "",
-      temp: "",
-      minTemp: "",
-      maxTemp: "", 
-      feelsLike: "",
-      date: "",
-      description: "",
-      windSpeed: "",
-      humidity: "",
-      pressure: "",
-      weatherIcon: ""
-  });
+  const dispatch = useDispatch();
+  const weatherData = useSelector((state) => state.weather);
 
   useEffect(() => {
       fetchWeatherData(weatherData.cityName)
           .then((obj) => {
-              setWeatherData({
+              dispatch(setWeatherData({
                   cityName: obj.name,
                   temp: obj.main.temp,
                   feelsLike: obj.main.feels_like,
@@ -35,12 +24,11 @@ export const useFetchWeather = () => {
                   description: obj.weather[0].description,
                   weatherIcon: obj.weather[0].icon,
                   date: obj.dt
-              })
+              }));
           }).catch((err) => {
               console.log(`Error fetching data from the API: ${err}`);
-          })
-          console.log("useEffect",   weatherData);
-  }, [weatherData])
+          });
+  }, [weatherData.cityName, dispatch]);
 
   return weatherData;
-}
+};
