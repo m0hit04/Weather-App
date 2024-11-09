@@ -8,7 +8,7 @@ const Dashboard = () => {
     return (
         <div className="flex">
             <Sidebar />
-            <main className={`${marginLeft} grow px-6 py-3 bg-gray-200 min-h-screen`}>
+            <main className={`${marginLeft} grow px-6 py-3 bg-gray-100 min-h-screen`}>
                 <Content />
             </main>
         </div>
