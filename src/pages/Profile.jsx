@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import {Sidebar} from '../components/Sidebar';
+import { useSelector } from 'react-redux';
 
 function Profile() {
-  const [isCollapsed, setIsCollapsed] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
   });
   const [message, setMessage] = useState('');
+  const { width, isCollapsed, marginLeft } = useSelector((state) => state.sidebar);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,11 +21,7 @@ function Profile() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would typically make an API call to update the profile
-    // For now, we'll just show a success message
     setMessage('Profile updated successfully!');
-    
-    // Clear the success message after 3 seconds
     setTimeout(() => {
       setMessage('');
     }, 3000);
@@ -32,73 +29,90 @@ function Profile() {
 
   return (
     <div className="flex h-screen bg-gray-100">
-      <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
+      <Sidebar />
       
       <main className={`
-        flex-1 p-6 transition-all duration-300
-        ${isCollapsed ? 'ml-16' : 'ml-64'}
+        flex-1 p-4 sm:p-6 lg:p-8 transition-all duration-300 ${marginLeft}
+        ${width}
       `}>
-        <div className="max-w-2xl mx-auto">
-          <h1 className="text-2xl font-bold mb-6">Profile Settings</h1>
-          
-          {message && (
-            <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
-              {message}
-            </div>
-          )}
+        <div className="flex justify-center items-center h-full">
+          <div className={`
+            w-full transition-all duration-300
+            ${isCollapsed 
+              ? 'sm:w-10/12 md:w-9/12 lg:w-8/12 xl:w-7/12'
+              : 'sm:w-9/12 md:w-8/12 lg:w-7/12 xl:w-6/12' 
+            }
+            bg-white rounded-lg shadow-sm p-4 sm:p-6 md:p-8
+          `}>
+            <h1 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-center">Profile Settings</h1>
+            
+            {message && (
+              <div className="bg-green-100 border border-green-400 text-green-700 px-3 py-2 sm:px-4 sm:py-3 rounded mb-4 text-center">
+                {message}
+              </div>
+            )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                required
-              />
-            </div>
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="mt-1 block w-full px-3 py-2 sm:px-4 sm:py-2.5 rounded-md border border-gray-300 
+                  shadow-sm focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 focus:outline-none
+                  text-sm sm:text-base"
+                  required
+                />
+              </div>
 
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                required
-              />
-            </div>
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="mt-1 block w-full px-3 py-2 sm:px-4 sm:py-2.5 rounded-md border border-gray-300 
+                  shadow-sm focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 focus:outline-none
+                  text-sm sm:text-base"
+                  required
+                />
+              </div>
 
-            <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-                Phone Number
-              </label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-              />
-            </div>
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="mt-1 block w-full px-3 py-2 sm:px-4 sm:py-2.5 rounded-md border border-gray-300 
+                  shadow-sm focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 focus:outline-none
+                  text-sm sm:text-base"
+                />
+              </div>
 
-            <button
-              type="submit"
-              className="w-full bg-slate-500 text-white py-2 px-4 rounded-md hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-            >
-              Update Profile
-            </button>
-          </form>
+              <button
+                type="submit"
+                className="w-full mt-6 bg-cyan-600 text-white py-2 sm:py-2.5 px-4 rounded-md 
+                hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2
+                text-sm sm:text-base font-medium transition-colors duration-200"
+              >
+                Update Profile
+              </button>
+            </form>
+          </div>
         </div>
       </main>
     </div>
