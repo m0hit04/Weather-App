@@ -6,8 +6,10 @@ const Content = () => {
   return (
     <>
       <Navbar />
-      <WeatherInfo />
-      <ChartLine />
+      <div className='flex flex-col mt-16 gap-4'>
+        <WeatherInfo />
+        <ChartLine />
+      </div>
     </>
   )
 }
