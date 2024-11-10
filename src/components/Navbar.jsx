@@ -1,7 +1,6 @@
 import {useNavigate} from "react-router-dom"
 import { Search } from "./Search";
 import { Refresh } from "./Refresh";
-import { Settings } from "./Settings";
 import { WeatherHeader } from "./showCity";
 import { useState } from 'react';
 import { SettingsModal } from './SettingsModal';
@@ -37,7 +36,6 @@ export const Navbar = () => {
 
                 <div className="hidden lg:flex mr-5 justify-center items-center">
                     <Refresh />
-                    <Settings onClick={() => setIsSettingsOpen(true)} />
                 </div>
             </div>
             
