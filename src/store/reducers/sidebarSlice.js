@@ -12,8 +12,8 @@ const sidebarSlice = createSlice({
     reducers: {
         toggleSidebar: (state) => {
             state.isCollapsed = !state.isCollapsed;
-            state.width = state.isCollapsed ? 'w-36' : 'w-56';
-            state.marginLeft = state.isCollapsed ? 'ml-36' : 'ml-56';
+            state.width = state.isCollapsed ? 'w-16' : 'w-52';
+            state.marginLeft = state.isCollapsed ? 'ml-14' : 'ml-52';
         }
     }
 });

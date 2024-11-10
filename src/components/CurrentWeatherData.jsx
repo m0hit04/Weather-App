@@ -20,7 +20,13 @@ function extractDate(unixTimeStamp) {
 function getDayOfWeek(index) {
     const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     return daysOfWeek[index % 7] || "Invalid index";
-  }
+}
+
+function getMonth(index) {
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    return months[index % 12] || "Invalid index";
+}
+
 
 export const CurrentWeatherData = () => {
 
@@ -38,26 +44,27 @@ export const CurrentWeatherData = () => {
     const [timeInHour, timeInMinutes] = extractTime(weatherData.date);
 
     return (
-        <div className="flex justify-between">
-            <div>
-                <img src={weatherIconUrl} alt="Weather Icon" />
-                <p>Sunrise: {sunriseHour}:{sunriseMinute}</p>
-                <p>Sunset: {sunsetHour}:{sunsetMinute}</p>
+        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 md:space-x-6">
+            <div className="text-center md:text-left">
+                <img src={weatherIconUrl} alt="Weather Icon" className="hover:bg-slate-200 rounded-full transition-colors duration-1000 mx-auto md:mx-0" />
+                <p className="text-slate-500 text-sm font-mono hover:text-slate-700 transition-colors duration-300">Sunrise: {sunriseHour}:{sunriseMinute}</p>
+                <p className="text-slate-500 text-sm font-mono hover:text-slate-700 transition-colors duration-300">Sunset: {sunsetHour}:{sunsetMinute}</p>
             </div>
-            <div>
-                <p>{getDayOfWeek(day)} {date} {month} {timeInHour}:{timeInMinutes}</p>
-                <p>{weatherData.temp}</p>
-                <p>Feels like {weatherData.feelsLike}°C</p>
-                <p>{weatherData.description}</p>
+            <div className="text-center md:text-left">
+                <p className="text-xl font-semibold pt-2 text-slate-500 hover:text-slate-700 transition-colors duration-300">{getDayOfWeek(day)} {date} {getMonth(month)} {timeInHour}:{timeInMinutes}</p>
+                <p className="text-4xl font-semibold text-yellow-300 pt-3 hover:text-yellow-400 transition-colors duration-300">{weatherData.temp} °</p>
+                <p className="text-slate-500 text-sm font-mono pt-3 hover:text-slate-700 transition-colors duration-300">Feels like {weatherData.feelsLike} °C</p>
+                <p className="text-slate-500 text-sm font-mono hover:text-slate-700 transition-colors duration-300">{weatherData.description}</p>
             </div>
-            <div>
-                <p>More Details</p>
-                <p>Min Temp: {weatherData.minTemp} </p>
-                <p>Max Temp: {weatherData.maxTemp} </p>
-                <p>Wind Speed: {weatherData.windSpeed}</p>
-                <p>Air humidity: {weatherData.humidity} </p>
-                <p>Pressure: {weatherData.pressure} </p>
+            <div className="text-center md:text-left">
+                <p className="text-slate-700 text-xl font-mono hover:text-slate-800 transition-colors duration-300 pt-1">More Details</p>
+                <p className="pt-4 text-slate-500 text-sm font-mono hover:text-slate-700 transition-colors duration-300 mb-2">Min Temp: {weatherData.minTemp} °C</p>
+                <p className="text-slate-500 text-sm font-mono hover:text-slate-700 transition-colors duration-300 mb-2">Max Temp: {weatherData.maxTemp} °C</p>
+                <p className="text-slate-500 text-sm font-mono hover:text-slate-700 transition-colors duration-300 mb-2">Wind Speed: {weatherData.windSpeed} m/s</p>
+                <p className="text-slate-500 text-sm font-mono hover:text-slate-700 transition-colors duration-300 mb-2">Air humidity: {weatherData.humidity} %</p>
+                <p className="text-slate-500 text-sm font-mono hover:text-slate-700 transition-colors duration-300">Pressure: {weatherData.pressure} hPa</p>
             </div>
         </div>
+
     )
 }
