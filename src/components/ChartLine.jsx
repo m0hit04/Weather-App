@@ -40,7 +40,7 @@ export const ChartLine = () => {
   }, [temperatureData])
 
   return (
-    (<div className="w-full md:w-10/12 px-4 md:ml-12">
+    (<div className="w-full md:w-10/12 px-4 md:mx-auto lg:w-8/12">
       <div ref={chartref} />
     </div>)
   )
