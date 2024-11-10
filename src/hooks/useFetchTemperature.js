@@ -14,18 +14,13 @@ function extractTime(unixTimeStamp) {
 function extractTemperatureData(fiveDay3hourData) {
     const result = [];
   
-    // Loop through the list to extract the first 8 timestamps with temperature
     for (let i = 0; i < Math.min(8, fiveDay3hourData.list.length); i++) {
       const entry = fiveDay3hourData.list[i];
-      
-      // Extract time in [hours, minutes] format
+
       const [hours, minutes] = extractTime(entry.dt);
-      const time = `${hours}:${minutes < 10 ? '0' + minutes : minutes}`; // Format time as "HH:MM"
-  
-      // Get the temperature
+      const time = `${hours}:${minutes < 10 ? '0' + minutes : minutes}`; 
       const temp = entry.main.temp;
   
-      // Push the data in the desired format
       result.push({ time, temp });
     }
   

@@ -9,7 +9,7 @@ function Profile() {
     phone: '',
   });
   const [message, setMessage] = useState('');
-  const { width, isCollapsed, marginLeft } = useSelector((state) => state.sidebar);
+  const { isCollapsed, marginLeft } = useSelector((state) => state.sidebar);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
