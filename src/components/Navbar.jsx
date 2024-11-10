@@ -14,8 +14,11 @@ export const Navbar = () => {
 
     return (
         <>
-            <div className="flex justify-between items-center h-18 pb-2 border-b border-neutral-300">
-                <button onClick={() => navigate("/")} className="hidden lg:block text-xl font-mono text-slate-500 hover:text-slate-700">
+            <div className="flex justify-between items-center h-18 pb-2 border-b border-slate-300 dark:border-slate-600">
+                <button 
+                    onClick={() => navigate("/")} 
+                    className="hidden lg:block text-xl font-mono text-slate-500 dark:text-slate-200 hover:text-slate-700 dark:hover:text-white transition-colors duration-300"
+                >
                     Home
                 </button>
                 <WeatherHeader />
@@ -25,7 +28,7 @@ export const Navbar = () => {
                         className="px-4 flex items-center lg:hidden"
                         onClick={() => setIsSearchOpen(!isSearchOpen)}
                     >
-                        <BiSearch className="w-6 h-6 text-gray-600" />
+                        <BiSearch className="w-6 h-6 text-slate-600 dark:text-slate-200" />
                     </button>
                     <div className="hidden lg:block lg:w-96">
                         <Search />
@@ -39,10 +42,10 @@ export const Navbar = () => {
             </div>
             
             {isSearchOpen && (
-                <div className="lg:hidden absolute top-0 left-0 w-full bg-white z-10 p-4">
+                <div className="lg:hidden absolute top-0 left-0 w-full bg-white dark:bg-slate-800 z-10 p-4">
                     <div className="flex items-center">
                         <button 
-                            className="mr-4"
+                            className="mr-4 text-slate-600 dark:text-slate-200 hover:text-slate-700 dark:hover:text-white transition-colors duration-300"
                             onClick={() => setIsSearchOpen(false)}
                         >
                             ✕

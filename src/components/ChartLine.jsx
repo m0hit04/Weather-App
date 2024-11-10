@@ -9,25 +9,60 @@ export const ChartLine = () => {
   const temperatureData = useSelector((state) => state.temperature);
   const xAxisCategories = temperatureData.map((item) => item.time);
   const yAxisData = temperatureData.map((item) => item.temp);
-  useEffect(() => {
+  const isDarkMode = document.documentElement.classList.contains('dark');
 
+  useEffect(() => {
     const options = {
       series: [{
         name: 'Temp',
-        data: yAxisData
+        data: yAxisData,
+        color: '#EAB308' // yellow-500
       }],
       chart: {
         type: 'line',
         zoom: {
           enabled: false
-        }
+        },
+        background: 'transparent',
+        foreColor: isDarkMode ? '#94A3B8' : '#475569' // dark: slate-400, light: slate-600
       },
       title: {
         text: 'Temperature',
-        align: 'center'
+        align: 'center',
+        style: {
+          color: isDarkMode ? '#94A3B8' : '#475569' // dark: slate-400, light: slate-600
+        }
       },
       xaxis: {
-        categories: xAxisCategories
+        categories: xAxisCategories,
+        labels: {
+          style: {
+            colors: isDarkMode ? '#94A3B8' : '#475569' // dark: slate-400, light: slate-600
+          }
+        },
+        axisBorder: {
+          color: isDarkMode ? '#475569' : '#64748B' // dark: slate-600, light: slate-500
+        },
+        axisTicks: {
+          color: isDarkMode ? '#475569' : '#64748B' // dark: slate-600, light: slate-500
+        }
+      },
+      yaxis: {
+        labels: {
+          style: {
+            colors: isDarkMode ? '#94A3B8' : '#475569' // dark: slate-400, light: slate-600
+          }
+        }
+      },
+      grid: {
+        borderColor: isDarkMode ? '#64748B' : '#64748B', // slate-500
+        strokeDashArray: 4
+      },
+      theme: {
+        mode: isDarkMode ? 'dark' : 'light'
+      },
+      tooltip: {
+        theme: isDarkMode ? 'dark' : 'light'
       }
     }
 
@@ -37,11 +72,11 @@ export const ChartLine = () => {
     return () => {
       chart.destroy();
     }
-  }, [temperatureData])
+  }, [temperatureData, isDarkMode])
 
   return (
-    (<div className="w-full md:w-10/12 px-4 md:mx-auto lg:w-8/12">
-      <div ref={chartref} />
-    </div>)
+    <div className="w-full md:w-10/12 px-4 md:mx-auto lg:w-8/12">
+      <div ref={chartref} className="dark:bg-transparent" />
+    </div>
   )
 }
