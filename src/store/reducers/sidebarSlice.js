@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     isCollapsed: false,
-    width: 'w-56', // default width class
-    marginLeft: 'ml-56' // default margin class
+    width: 'w-56', 
+    marginLeft: 'ml-56' 
 };
 
 const sidebarSlice = createSlice({

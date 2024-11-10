@@ -30,32 +30,32 @@ export const ChartLine = () => {
         text: 'Temperature',
         align: 'center',
         style: {
-          color: isDarkMode ? '#94A3B8' : '#475569' // dark: slate-400, light: slate-600
+          color: isDarkMode ? '#94A3B8' : '#475569' 
         }
       },
       xaxis: {
         categories: xAxisCategories,
         labels: {
           style: {
-            colors: isDarkMode ? '#94A3B8' : '#475569' // dark: slate-400, light: slate-600
+            colors: isDarkMode ? '#94A3B8' : '#475569' 
           }
         },
         axisBorder: {
-          color: isDarkMode ? '#475569' : '#64748B' // dark: slate-600, light: slate-500
+          color: isDarkMode ? '#475569' : '#64748B' 
         },
         axisTicks: {
-          color: isDarkMode ? '#475569' : '#64748B' // dark: slate-600, light: slate-500
+          color: isDarkMode ? '#475569' : '#64748B' 
         }
       },
       yaxis: {
         labels: {
           style: {
-            colors: isDarkMode ? '#94A3B8' : '#475569' // dark: slate-400, light: slate-600
+            colors: isDarkMode ? '#94A3B8' : '#475569' 
           }
         }
       },
       grid: {
-        borderColor: isDarkMode ? '#64748B' : '#64748B', // slate-500
+        borderColor: isDarkMode ? '#64748B' : '#64748B', 
         strokeDashArray: 4
       },
       theme: {
