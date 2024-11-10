@@ -20,14 +20,14 @@ export const Navbar = () => {
                 </button>
                 <WeatherHeader />
                 
-                <div className="flex-grow flex items-center justify-end">
+                <div className="flex-grow flex items-center lg:justify-center justify-end">
                     <button 
                         className="px-4 flex items-center lg:hidden"
                         onClick={() => setIsSearchOpen(!isSearchOpen)}
                     >
                         <BiSearch className="w-6 h-6 text-gray-600" />
                     </button>
-                    <div className="hidden xl:block">
+                    <div className="hidden lg:block lg:w-96">
                         <Search />
                     </div>
                 </div>

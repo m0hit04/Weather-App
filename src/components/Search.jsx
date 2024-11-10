@@ -19,7 +19,7 @@ export function Search({ onSearchComplete }) {
             <label htmlFor="search" className="sr-only">Search</label>
             <div className="relative">
                 <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                    <svg className="w-4 h-4 text-gray-500" aria-hidden="true" fill="none" viewBox="0 0 20 20">
+                    <svg className="w-5 h-5 text-gray-500" aria-hidden="true" fill="none" viewBox="0 0 20 20">
                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                     </svg>
                 </div> 
@@ -28,7 +28,8 @@ export function Search({ onSearchComplete }) {
                     value={city}
                     type="search"
                     id="search"
-                    className="block w-full p-2 md:p-4 ps-10 text-sm text-gray-900 rounded-lg bg-gray-50"
+                    className="block w-full p-2 md:p-4 ps-12 md:ps-14 text-sm text-gray-900 rounded-lg bg-gray-50 
+                    focus:outline-none focus:ring-2 focus:ring-cyan-300 focus:border-transparent"
                     placeholder="Search city..."
                     onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
                 />
